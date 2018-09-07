@@ -67,7 +67,7 @@ while n>0:
     n = n-1
 '''
 
-'''#循环练习   
+'''#循环练习
 # -*- coding: utf-8 -*-
 L = ['Bart', 'Lisa', 'Adam']
 for name in L:
@@ -88,15 +88,15 @@ print(hex(n2))
 import math
 def quadratic(a, b, c):
 	d=b**2-4*a*c
-	if d==0: 
+	if d==0:
 		x=-b/(2*a)
 		return x
-	
-	elif d>0: 
+
+	elif d>0:
 		x1=(math.sqrt(d)-b)/(2*a)
 		x2=-(math.sqrt(d)+b)/(2*a)
 		return (x1,x2)
-	
+
 	else:
 		return('无实数解')
 a=float(input('请输入a：'))
@@ -143,8 +143,8 @@ else:
         print('测试失败!')
     except TypeError:
         print('测试成功!')
-'''		
-'''		
+'''
+'''
 def fact(n):
     if n==1:
         return 1
@@ -248,7 +248,7 @@ else:
 #列表生成式练习
 # -*- coding: utf-8 -*-
 L1 = ['Hello', 'World', 18, 'Apple', None]
-L2 = [s.lower() for s in L1 if isinstance(s,str)==True]		
+L2 = [s.lower() for s in L1 if isinstance(s,str)==True]
 # 测试:
 print(L2)
 if L2 == ['hello', 'world', 'apple']:
@@ -307,7 +307,7 @@ print(L2)
 #第二题列表乘积
 def time(x,y):
 	return x*y
-def prod(L): 
+def prod(L):
     return reduce(time,L)
 # 测试:
 print('3 * 5 * 7 * 9 =', prod([3, 5, 7, 9]))
@@ -315,7 +315,7 @@ if prod([3, 5, 7, 9]) == 945:
     print('测试成功!')
 else:
     print('测试失败!')
-	
+
 #第三题字符串类型转换
 digits={'.':'.','0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
 def chr2num(s):
@@ -335,7 +335,7 @@ if abs(str2float('123.456') - 123.456) < 0.00001:
     print('测试成功!')
 else:
     print('测试失败!')
-'''	
+'''
 
 '''
 def _odd_iter():
@@ -364,14 +364,14 @@ for n in primes():
 '''
 #filter练习
 # -*- coding: utf-8 -*-
-from functools import reduce	
+from functools import reduce
 digits={'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
 def chr2num(s):
 	return digits[s]
 
 def fn(x,y):
 	return x*10+y
-				
+
 def is_palindrome(n):
 	s=list(str(n))
 	l=len(s)
@@ -390,7 +390,7 @@ if list(filter(is_palindrome, range(1, 200))) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 11,
     print('测试成功!')
 else:
     print('测试失败!')
-'''	
+'''
 
 '''
 #sorted函数练习
@@ -426,7 +426,7 @@ def createCounter():
     def counter():
         return next(x)
     return counter
-	
+
 # 测试:
 counterA = createCounter()
 print(counterA(), counterA(), counterA(), counterA(), counterA()) # 1 2 3 4 5
@@ -448,13 +448,14 @@ print(L)
 
 '''
 #匿名函数练习
-# -*- coding: utf-8 -*-	
+# -*- coding: utf-8 -*-
 L = list(filter(lambda n:n%2==1, range(1, 20)))
 print(L)
 '''
 
-
+'''
 # -*- coding: utf-8 -*-
+#装饰器练习
 #打印函数执行时间
 import time, functools
 def metric(fn):
@@ -462,7 +463,7 @@ def metric(fn):
 		print('%s executed in %s ms' % (fn.__name__, 10.24))
 		return fn(*args,**kw)
 	return wrapper
-	
+
 # 测试
 @metric
 def fast(x, y):
@@ -480,9 +481,9 @@ if f != 33:
     print('测试失败!')
 elif s != 7986:
     print('测试失败!')
-else: 
+else:
 	print('测试成功!')
-	
+
 
 #函数的调用前后输出
 def log(func):
@@ -498,7 +499,7 @@ def now():
 now()
 
 
-#第三题
+#可自定义输入参数的decorator
 def logger(*text):
 	def decorator(func):
 		def wrapper(*args,**kw):
@@ -520,3 +521,4 @@ f1()
 def f2():
 	print('2018-09-06')
 f2()
+'''
