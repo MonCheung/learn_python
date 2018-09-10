@@ -522,3 +522,35 @@ def f2():
 	print('2018-09-06')
 f2()
 '''
+
+#类和实例练习
+# -*- coding: utf-8 -*-
+class Student(object):
+
+	def __init__(self,name,sex,age,score):
+		self.name=name
+		self.sex=sex
+		self.age=age
+		self.score=score
+
+	def get_grade(self):
+		if self.score >= 90:
+			return 'A'
+		elif self.score >= 60:
+			return 'B'
+		else:
+			return 'C'
+
+	def get_group(self):
+		if self.age >=3 and self.age<=6:
+			return '儿童'
+		elif self.age >=7 and self.age<=14:
+			return '少年'
+		else:
+			return '成年'
+
+#测试
+lisa = Student('Lisa', 'female',6,99)
+bart = Student('Bart', 'male',9,59)
+print(lisa.name, lisa.get_group(), lisa.get_grade())
+print(bart.name, bart.get_group(), bart.get_grade())
