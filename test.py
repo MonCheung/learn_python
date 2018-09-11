@@ -550,7 +550,7 @@ class Student(object):
 			return '成年'
 
 #测试
-lisa = Student('Lisa', 'female',6,99)
+lisa = Student('Lisa', 'female',2,99)
 bart = Student('Bart', 'male',9,59)
-print(lisa.name, lisa.get_group(), lisa.get_grade())
-print(bart.name, bart.get_group(), bart.get_grade())
+print(lisa.name, lisa.get_group(), '\'age is %s\''% lisa.age, lisa.get_grade())
+print(bart.name, bart.get_group(), '\'age is %s\''% bart.age, bart.get_grade())
