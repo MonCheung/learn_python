@@ -523,6 +523,7 @@ def f2():
 f2()
 '''
 
+'''
 #类和实例练习
 # -*- coding: utf-8 -*-
 class Student(object):
@@ -554,3 +555,33 @@ lisa = Student('Lisa', 'female',2,99)
 bart = Student('Bart', 'male',9,59)
 print(lisa.name, lisa.get_group(), '\'age is %s\''% lisa.age, lisa.get_grade())
 print(bart.name, bart.get_group(), '\'age is %s\''% bart.age, bart.get_grade())
+'''
+
+
+#访问限制练习
+# -*- coding: utf-8 -*-
+class Student(object):
+    """docstring for Student."""
+    def __init__(self, name,gender):
+        self.name=name
+        self.__gender=gender
+
+    def get_gender(self):
+        return self.__gender
+
+    def set_gender(self,gender):
+        if  gender=='male' or 'female':
+            self.__gender=gender
+        else:
+            raise ValueError('not gender')
+
+# 测试:
+bart = Student('Bart', 'male')
+if bart.get_gender() != 'male':
+    print('测试失败!')
+else:
+    bart.set_gender('female')
+    if bart.get_gender() != 'female':
+        print('测试失败!')
+    else:
+        print('测试成功!')
