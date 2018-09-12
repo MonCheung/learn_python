@@ -557,7 +557,7 @@ print(lisa.name, lisa.get_group(), '\'age is %s\''% lisa.age, lisa.get_grade())
 print(bart.name, bart.get_group(), '\'age is %s\''% bart.age, bart.get_grade())
 '''
 
-
+'''
 #访问限制练习
 # -*- coding: utf-8 -*-
 class Student(object):
@@ -585,3 +585,29 @@ else:
         print('测试失败!')
     else:
         print('测试成功!')
+'''
+
+
+#实例属性和类属性
+# -*- coding: utf-8 -*-
+class Student(object):
+    count = 0
+
+    def __init__(self, name):
+        self.name = name
+        Student.count += 1
+
+# 测试:
+if Student.count != 0:
+    print('测试失败!')
+else:
+    bart = Student('Bart')
+    if Student.count != 1:
+        print('测试失败!')
+    else:
+        lisa = Student('Bart')
+        if Student.count != 2:
+            print('测试失败!')
+        else:
+            print('Students:', Student.count)
+            print('测试通过!')
