@@ -613,7 +613,7 @@ else:
             print('测试通过!')
 '''
 
-
+'''
 #property属性在类中的应用
 # -*- coding: utf-8 -*-
 class Screen(object):
@@ -646,3 +646,29 @@ if s.resolution == 786432:
     print('测试通过!')
 else:
     print('测试失败!')
+'''
+
+
+#错误处理
+# -*- coding: utf-8 -*-
+from functools import reduce
+
+def str2num(s):
+    try:
+        return int(s)
+    except Exception as e:
+        print('',e)
+        return float(s)
+
+def calc(exp):
+    ss = exp.split('+')
+    ns = map(str2num, ss)
+    return reduce(lambda acc, x: acc + x, ns)
+
+def main():
+    r = calc('100 + 200 + 345')
+    print('100 + 200 + 345 =', r)
+    r = calc('99 + 88 + 7.6')
+    print('99 + 88 + 7.6 =', r)
+
+main()
