@@ -1,78 +1,41 @@
+import unittest
 
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+from mydict import Dict
 
-' Simple ORM using metaclass '
+class TestDict(unittest.TestCase):
 
-class Field(object):
+    def setUp(self):
+        print('setUp...')
 
-    def __init__(self, name, column_type):
-        self.name = name
-        self.column_type = column_type
+    def test_init(self):
+        d = Dict(a=1, b='test')
+        self.assertEqual(d.a, 1)
+        self.assertEqual(d.b, 'test')
+        self.assertTrue(isinstance(d, dict))
 
-    def __str__(self):
-        return '<%s:%s>' % (self.__class__.__name__, self.name)
+    def test_key(self):
+        d = Dict()
+        d['key'] = 'value'
+        self.assertEqual(d.key, 'value')
 
-class StringField(Field):
+    def test_attr(self):
+        d = Dict()
+        d.key = 'value'
+        self.assertTrue('key' in d)
+        self.assertEqual(d['key'], 'value')
 
-    def __init__(self, name):
-        super(StringField, self).__init__(name, 'varchar(100)')
+    def test_keyerror(self):
+        d = Dict()
+        with self.assertRaises(KeyError):
+            value = d['empty']
 
-class IntegerField(Field):
+    def test_attrerror(self):
+        d = Dict()
+        with self.assertRaises(AttributeError):
+            value = d.empty
 
-    def __init__(self, name):
-        super(IntegerField, self).__init__(name, 'bigint')
+    def tearDown(self):
+        print('tearDown...')
 
-class ModelMetaclass(type):
-
-    def __new__(cls, name, bases, attrs):
-        if name=='Model':
-            return type.__new__(cls, name, bases, attrs)
-        print('Found model: %s' % name)
-        mappings = dict()
-        for k, v in attrs.items():
-            if isinstance(v, Field):
-                print('Found mapping: %s ==> %s' % (k, v))
-                mappings[k] = v
-        for k in mappings.keys():
-            attrs.pop(k)
-        attrs['__mappings__'] = mappings # 保存属性和列的映射关系
-        attrs['__table__'] = name # 假设表名和类名一致
-        return type.__new__(cls, name, bases, attrs)
-
-class Model(dict, metaclass=ModelMetaclass):
-
-    def __init__(self, **kw):
-        super(Model, self).__init__(**kw)
-
-    def __getattr__(self, key):
-        try:
-            return self[key]
-        except KeyError:
-            raise AttributeError(r"'Model' object has no attribute '%s'" % key)
-
-    def __setattr__(self, key, value):
-        self[key] = value
-
-    def save(self):
-        fields = []
-        params = []
-        args = []
-        for k, v in self.__mappings__.items():
-            fields.append(v.name)
-            params.append('?')
-            args.append(getattr(self, k, None))
-        sql = 'insert into %s (%s) values (%s)' % (self.__table__, ','.join(fields), ','.join(params))
-        print('SQL: %s' % sql)
-        print('ARGS: %s' % str(args))
-
-# testing code:
-
-class User(Model):
-    id = IntegerField('id')
-    name = StringField('username')
-    email = StringField('email')
-    password = StringField('password')
-
-u = User(id=12345, name='Michael', email='test@orm.org', password='my-pwd')
-u.save()
+if __name__ == '__main__':
+    unittest.main()
