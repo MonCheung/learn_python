@@ -724,7 +724,7 @@ if __name__ == '__main__':
     unittest.main()
 '''
 
-
+'''
 #文档测试练习
 # -*- coding: utf-8 -*-
 def fact(n):
@@ -749,3 +749,58 @@ def fact(n):
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
+'''
+
+'''
+#实现dir -l输出的练习
+# -*- coding: utf-8 -*-
+from datetime import datetime
+import os
+pwd = os.path.abspath('.')
+print(pwd)
+print('      Size     Last Modified  Name')
+print('------------------------------------------------------------')
+for f in os.listdir(pwd):
+    fsize = os.path.getsize(f)
+    mtime = datetime.fromtimestamp(os.path.getmtime(f)).strftime('%Y-%m-%d %H:%M')
+    flag = '/' if os.path.isdir(f) else ''
+    print('%10d  %s  %s%s' % (fsize, mtime, f, flag))
+'''
+
+'''
+#指定字符串的文件输出的练习(os.walk的用法)
+# -*- coding: utf-8 -*-
+import os
+pwd = os.path.abspath('.')
+print(pwd)
+print(os.walk("."))
+sr = input('关键字符串：')
+for path, dirs, files in os.walk("."):
+    for a in files + dirs:
+        if sr in a:
+            print(os.path.join(path, a))
+'''
+
+#指定字符串的文件输出的练习（使用递归）
+# -*- coding: utf-8 -*-
+import os
+
+dir = os.path.abspath('.')
+
+def fileFound(seq, filedir):
+
+    li = os.listdir(filedir)
+
+    for x in li:
+
+        path = os.path.join(filedir,x)
+
+        if os.path.isfile(path) and seq in x:
+
+            print(os.path.abspath(path).replace(dir,''))
+
+        if os.path.isdir(path):
+
+            fileFound(seq, path)
+
+fileFound('py',dir)
