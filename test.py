@@ -728,7 +728,7 @@ if __name__ == '__main__':
 #文档测试练习
 # -*- coding: utf-8 -*-
 def fact(n):
-    '''
+    ''''''
     Calculate 1*2*...*n
 
     >>> fact(1)
@@ -739,7 +739,7 @@ def fact(n):
     Traceback (most recent call last):
     ...
     ValueError
-    '''
+    '''''''
     if n < 1:
         raise ValueError()
     if n == 1:
@@ -803,4 +803,6 @@ def fileFound(seq, filedir):
 
             fileFound(seq, path)
 
-fileFound('py',dir)
+n=input('请输入关键字符串：')
+
+fileFound(n,dir)
