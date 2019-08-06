@@ -781,6 +781,7 @@ for path, dirs, files in os.walk("."):
             print(os.path.join(path, a))
 '''
 
+'''
 #指定字符串的文件输出的练习（使用递归）
 # -*- coding: utf-8 -*-
 import os
@@ -806,3 +807,12 @@ def fileFound(seq, filedir):
 n=input('请输入关键字符串：')
 
 fileFound(n,dir)
+'''
+
+
+#序列化练习
+# -*- coding: utf-8 -*-
+import json
+obj = dict(name='小明', age=20)
+s = json.dumps(obj,ensure_ascii=True)#unicode编码包含ascii编码，故将汉字转为unicode编码
+print(s)
