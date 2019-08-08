@@ -809,10 +809,38 @@ n=input('请输入关键字符串：')
 fileFound(n,dir)
 '''
 
-
+'''
 #序列化练习
 # -*- coding: utf-8 -*-
 import json
 obj = dict(name='小明', age=20)
 s = json.dumps(obj,ensure_ascii=True)#unicode编码包含ascii编码，故将汉字转为unicode编码
 print(s)
+'''
+
+
+#正则表达式练习（1）
+# -*- coding: utf-8 -*-
+import re
+def is_valid_email(addr):
+    return re.match(r'^\w+[\.\w]\w+@\w+\.com$',addr)
+
+# 测试:
+assert is_valid_email('someone@gmail.com')
+assert is_valid_email('bill.gates@microsoft.com')
+assert not is_valid_email('bob#example.com')
+assert not is_valid_email('mr-bob@example.com')
+print('ok')
+
+
+#正则表达式练习（2）
+# -*- coding: utf-8 -*-
+import re
+def name_of_email(addr):
+    return re.match(r'.*?([\w\s]+)',addr).group(1)
+    #'.*?'可以匹配任意长度的字符串（除字符串、数字、空格，可为零）
+
+# 测试:
+assert name_of_email('<Tom Paris> tom@voyager.org') == 'Tom Paris'
+assert name_of_email('tom@voyager.org') == 'tom'
+print('ok')
