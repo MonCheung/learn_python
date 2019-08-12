@@ -897,7 +897,7 @@ assert b'abcd' == safe_base64_decode(b'YWJjZA'), safe_base64_decode('YWJjZA')
 print('ok')
 '''
 
-
+'''
 #struct模块打印位图宽高和颜色
 # -*- coding: utf-8 -*-
 import base64, struct
@@ -916,4 +916,36 @@ bi = bmp_info(bmp_data)
 assert bi['width'] == 28
 assert bi['height'] == 10
 assert bi['color'] == 16
+print('ok')
+'''
+
+
+# -*- coding: utf-8 -*-
+import hashlib
+
+db = {
+    'michael': 'e10adc3949ba59abbe56e057f20f883e',
+    'bob': '878ef96e86145580c38c87f0410ad153',
+    'alice': '99b1c2188db85afee403b1536010c2c9'
+}
+
+def login(user, password):
+    md5=hashlib.md5()
+    md5.update(password.encode('utf-8'))
+    password=md5.hexdigest()
+    if user in db:
+        if db[user]==password:
+            return True
+        else:
+            return False
+    else:
+        print('用户不存在')
+break
+# 测试:
+assert login('michael', '123456')
+assert login('bobb', 'abc999')
+assert login('alice', 'alice2008')
+assert not login('michael', '1234567')
+assert not login('bob', '123456')
+assert not login('alice', 'Alice2008')
 print('ok')
