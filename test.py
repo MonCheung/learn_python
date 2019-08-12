@@ -848,15 +848,17 @@ print('ok')
 '''
 
 
+'''
 #datetime模块练习
 # -*- coding:utf-8 -*-
-
 import re
 from datetime import datetime, timezone, timedelta
 
 def to_timestamp(dt_str, tz_str):
+    #获取输入时间的datetime
     dt=datetime.strptime(dt_str,'%Y-%m-%d %H:%M:%S')
     if '+' in tz_str:
+        #通过正则取出时区，换算为北京时间
         n=int(re.match(r'UTC.(0?)(\d+):',tz_str).group(2))
         st=dt-timedelta(hours=n-8)
         return st.timestamp()
@@ -864,7 +866,6 @@ def to_timestamp(dt_str, tz_str):
         n=int(re.match(r'UTC.(0?)(\d+):',tz_str).group(2))
         st=dt+timedelta(hours=n+8)
         return st.timestamp()
-
 
 # 测试:
 
@@ -876,4 +877,21 @@ t2 = to_timestamp('2015-5-31 16:10:30', 'UTC-09:00')
 print(t2)
 assert t2 == 1433121030.0, t2
 
+print('ok')
+'''
+
+
+#base64模块
+# -*- coding: utf-8 -*-
+import base64
+def safe_base64_decode(s):
+    if len(s)%4 != 0:
+        s=s+b'='
+        return safe_base64_decode(s)
+    else:
+        return base64.b64decode(s)
+
+# 测试:
+assert b'abcd' == safe_base64_decode(b'YWJjZA=='), safe_base64_decode('YWJjZA==')
+assert b'abcd' == safe_base64_decode(b'YWJjZA'), safe_base64_decode('YWJjZA')
 print('ok')
