@@ -952,8 +952,8 @@ assert not login('alice', 'Alice2008')
 print('ok')
 '''
 
-
-
+'''
+#hashlib模块加盐md5验证用户登录的函数
 # -*- coding: utf-8 -*-
 import hashlib, random
 
@@ -973,12 +973,10 @@ db = {
 
 def login(username, password):
     user = db[username]
-    print(db[username])
     if user.password == get_md5(password+user.salt):
         return True
     else:
         return False
-
 
 # 测试:
 assert login('michael', '123456')
@@ -987,4 +985,67 @@ assert login('alice', 'alice2008')
 assert not login('michael', '1234567')
 assert not login('bob', '123456')
 assert not login('alice', 'Alice2008')
+print('ok')
+'''
+
+'''
+#hmac算法验证用户登录
+# -*- coding: utf-8 -*-
+import hmac, random
+
+def hmac_md5(key, s):
+    return hmac.new(key.encode('utf-8'), s.encode('utf-8'), digestmod='MD5').hexdigest()
+
+class User(object):
+    def __init__(self, username, password):
+        self.username = username
+        self.key = ''.join([chr(random.randint(48, 122)) for i in range(20)])
+        self.password = hmac_md5(self.key, password)
+
+db = {
+    'michael': User('michael', '123456'),
+    'bob': User('bob', 'abc999'),
+    'alice': User('alice', 'alice2008')
+}
+
+def login(username, password):
+    user = db[username]
+    return user.password == hmac_md5(user.key, password)
+
+# 测试:
+assert login('michael', '123456')
+assert login('bob', 'abc999')
+assert login('alice', 'alice2008')
+assert not login('michael', '1234567')
+assert not login('bob', '123456')
+assert not login('alice', 'Alice2008')
+print('ok')
+'''
+
+
+
+# -*- coding: utf-8 -*-
+import itertools
+def pi(N):
+    ' 计算pi的值 '
+    # step 1: 创建一个奇数序列: 1, 3, 5, 7, 9, ...
+    odd=itertools.count(1,2)
+    # step 2: 取该序列的前N项: 1, 3, 5, 7, 9, ..., 2*N-1.
+    odd_n=itertools.takewhile(lambda a:a<=2*N-1,odd)
+    # step 3: 添加正负符号并用4除: 4/1, -4/3, 4/5, -4/7, 4/9, ...
+    sum=0
+    for x in odd_n:
+        sum+=4/x*(-1)**(x//2)
+    # step 4: 求和:
+    return sum
+
+# 测试:
+print(pi(10))
+print(pi(100))
+print(pi(1000))
+print(pi(10000))
+assert 3.04 < pi(10) < 3.05
+assert 3.13 < pi(100) < 3.14
+assert 3.140 < pi(1000) < 3.141
+assert 3.1414 < pi(10000) < 3.1415
 print('ok')
