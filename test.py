@@ -1022,8 +1022,8 @@ assert not login('alice', 'Alice2008')
 print('ok')
 '''
 
-
-
+'''
+#itertools模块计算圆周率序列公式的前N项和
 # -*- coding: utf-8 -*-
 import itertools
 def pi(N):
@@ -1048,4 +1048,22 @@ assert 3.04 < pi(10) < 3.05
 assert 3.13 < pi(100) < 3.14
 assert 3.140 < pi(1000) < 3.141
 assert 3.1414 < pi(10000) < 3.1415
+print('ok')
+'''
+
+
+
+# -*- coding: utf-8 -*-
+from urllib import request
+import json
+def fetch_data(url):
+    with  request.urlopen(url) as f:
+        data=f.read()
+    return json.loads(data)
+
+# 测试
+URL = 'https://www.easy-mock.com/mock/5cbec5d8bfb3b05625e96633/dreamlf/urllibTest'
+data = fetch_data(URL)
+print(data)
+assert data['query']['results']['channel']['location']['city'] == 'Beijing'
 print('ok')
