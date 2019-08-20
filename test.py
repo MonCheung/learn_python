@@ -1052,7 +1052,7 @@ print('ok')
 '''
 
 
-
+#利用urllib读取JSON，将JSON解析为Python对象
 # -*- coding: utf-8 -*-
 from urllib import request
 import json
