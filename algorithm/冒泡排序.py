@@ -5,6 +5,7 @@ def d_sort(arr):
 
         swapped = False
 
+        #正序实现
         for j in range(n-i-1):
 
             if arr[j] > arr[j+1]:
@@ -21,3 +22,16 @@ arr = [12,24,23,78,22,45]
 d_sort(arr)
 
 print(arr)
+
+print(list(range(2,0,-1)))
+
+
+
+'''
+        #逆序实现
+        for j in range(n-1,i,-1):
+            if arr[j] > arr[j-1]:
+                arr[j],arr[j-1] = arr[j-1],arr[j]
+
+            swapped = True
+'''
