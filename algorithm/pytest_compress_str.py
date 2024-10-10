@@ -20,4 +20,4 @@ def test_compress_with_reduction():
 
 if __name__ == '__main__':
     #指定文件路径，只执行当前测试脚本
-    pytest.main(['algorithm/pytest_compress_str.py'])
+    pytest.main(['algorithm/pytest_compress_str.py','--html=algorithm/report.html'])
